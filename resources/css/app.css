@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    body{
+        @apply bg-white flex justify-center items-center min-h-dvh text-dajgreen-light dark:bg-dajgreen dark:text-white;
+    }
+
+    body #app{
+        @apply flex flex-col justify-center px-4 lg:px-0;
+    }
+}
+
+@layer components{
+    .wb-title{
+        @apply font-console font-bold;
+    }
+
+    .wb-body{
+        @apply bg-slate-900;
+    }
+
+    .social-wrapper{
+        @apply mb-4 text-sm leading-6 flex flex-col mt-2 space-y-2;
+    }
+
+    .social-wrapper .social-link{
+        @apply text-green-900 -translate-x-6 transform transition-all ease-in-out duration-500;
+    }
+
+    .social-wrapper .social-link:hover{
+        @apply -translate-x-0;
+    }
+
+    .social-wrapper .social-icon{
+        @apply float-left mr-2 invert-0 dark:invert;
+    }
+}
