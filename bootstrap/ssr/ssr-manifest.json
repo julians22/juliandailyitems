@@ -1,5 +1,6 @@
 {
   "\u0000plugin-vue:export-helper": [
+    "/build/assets/prev-qt-vb8-U.png",
     "/build/assets/Julian-ecfpeahs.jpg",
     "/build/assets/pixelate_julian-HK5kF2OM.png",
     "/build/assets/twitter-utpEFr_u.png",
@@ -8,6 +9,7 @@
     "/build/assets/github-amIXt1jg.png"
   ],
   "public/Julian.jpg": [
+    "/build/assets/prev-qt-vb8-U.png",
     "/build/assets/Julian-ecfpeahs.jpg",
     "/build/assets/pixelate_julian-HK5kF2OM.png",
     "/build/assets/twitter-utpEFr_u.png",
@@ -16,6 +18,7 @@
     "/build/assets/github-amIXt1jg.png"
   ],
   "public/icons/github.png": [
+    "/build/assets/prev-qt-vb8-U.png",
     "/build/assets/Julian-ecfpeahs.jpg",
     "/build/assets/pixelate_julian-HK5kF2OM.png",
     "/build/assets/twitter-utpEFr_u.png",
@@ -24,6 +27,7 @@
     "/build/assets/github-amIXt1jg.png"
   ],
   "public/icons/instagram.png": [
+    "/build/assets/prev-qt-vb8-U.png",
     "/build/assets/Julian-ecfpeahs.jpg",
     "/build/assets/pixelate_julian-HK5kF2OM.png",
     "/build/assets/twitter-utpEFr_u.png",
@@ -32,6 +36,16 @@
     "/build/assets/github-amIXt1jg.png"
   ],
   "public/icons/linkedin.png": [
+    "/build/assets/prev-qt-vb8-U.png",
+    "/build/assets/Julian-ecfpeahs.jpg",
+    "/build/assets/pixelate_julian-HK5kF2OM.png",
+    "/build/assets/twitter-utpEFr_u.png",
+    "/build/assets/linkedin-mKZIAaDv.png",
+    "/build/assets/instagram-7-6aoY1V.png",
+    "/build/assets/github-amIXt1jg.png"
+  ],
+  "public/icons/prev.png": [
+    "/build/assets/prev-qt-vb8-U.png",
     "/build/assets/Julian-ecfpeahs.jpg",
     "/build/assets/pixelate_julian-HK5kF2OM.png",
     "/build/assets/twitter-utpEFr_u.png",
@@ -40,6 +54,7 @@
     "/build/assets/github-amIXt1jg.png"
   ],
   "public/icons/twitter.png": [
+    "/build/assets/prev-qt-vb8-U.png",
     "/build/assets/Julian-ecfpeahs.jpg",
     "/build/assets/pixelate_julian-HK5kF2OM.png",
     "/build/assets/twitter-utpEFr_u.png",
@@ -48,6 +63,7 @@
     "/build/assets/github-amIXt1jg.png"
   ],
   "public/pixelate_julian.png": [
+    "/build/assets/prev-qt-vb8-U.png",
     "/build/assets/Julian-ecfpeahs.jpg",
     "/build/assets/pixelate_julian-HK5kF2OM.png",
     "/build/assets/twitter-utpEFr_u.png",
@@ -55,7 +71,11 @@
     "/build/assets/instagram-7-6aoY1V.png",
     "/build/assets/github-amIXt1jg.png"
   ],
+  "resources/js/Components/DailyItemCard.vue": [
+    "/build/assets/DailyItemCard-T7mOmoXf.js"
+  ],
   "resources/js/Components/TogglerTheme.vue": [
+    "/build/assets/prev-qt-vb8-U.png",
     "/build/assets/Julian-ecfpeahs.jpg",
     "/build/assets/pixelate_julian-HK5kF2OM.png",
     "/build/assets/twitter-utpEFr_u.png",
@@ -64,12 +84,13 @@
     "/build/assets/github-amIXt1jg.png"
   ],
   "resources/js/Components/Winbox/About.vue": [
-    "/build/assets/About-RiBXRhk5.js"
+    "/build/assets/About-rdytpvIA.js"
   ],
   "resources/js/Components/Winbox/Contact.vue": [
-    "/build/assets/Contact--P9OboJx.js"
+    "/build/assets/Contact-kdTGGYKZ.js"
   ],
   "resources/js/Components/utils/Error.vue": [
+    "/build/assets/prev-qt-vb8-U.png",
     "/build/assets/Julian-ecfpeahs.jpg",
     "/build/assets/pixelate_julian-HK5kF2OM.png",
     "/build/assets/twitter-utpEFr_u.png",
@@ -78,6 +99,7 @@
     "/build/assets/github-amIXt1jg.png"
   ],
   "resources/js/Components/utils/Loading.vue": [
+    "/build/assets/prev-qt-vb8-U.png",
     "/build/assets/Julian-ecfpeahs.jpg",
     "/build/assets/pixelate_julian-HK5kF2OM.png",
     "/build/assets/twitter-utpEFr_u.png",
@@ -86,6 +108,7 @@
     "/build/assets/github-amIXt1jg.png"
   ],
   "resources/js/Pages/Collection.vue": [
+    "/build/assets/prev-qt-vb8-U.png",
     "/build/assets/Julian-ecfpeahs.jpg",
     "/build/assets/pixelate_julian-HK5kF2OM.png",
     "/build/assets/twitter-utpEFr_u.png",
@@ -94,6 +117,7 @@
     "/build/assets/github-amIXt1jg.png"
   ],
   "resources/js/Pages/Welcome.vue": [
+    "/build/assets/prev-qt-vb8-U.png",
     "/build/assets/Julian-ecfpeahs.jpg",
     "/build/assets/pixelate_julian-HK5kF2OM.png",
     "/build/assets/twitter-utpEFr_u.png",
@@ -102,6 +126,7 @@
     "/build/assets/github-amIXt1jg.png"
   ],
   "resources/js/plugins/yearCalculate.js": [
+    "/build/assets/prev-qt-vb8-U.png",
     "/build/assets/Julian-ecfpeahs.jpg",
     "/build/assets/pixelate_julian-HK5kF2OM.png",
     "/build/assets/twitter-utpEFr_u.png",
@@ -110,6 +135,16 @@
     "/build/assets/github-amIXt1jg.png"
   ],
   "resources/js/ssr.js": [
+    "/build/assets/prev-qt-vb8-U.png",
+    "/build/assets/Julian-ecfpeahs.jpg",
+    "/build/assets/pixelate_julian-HK5kF2OM.png",
+    "/build/assets/twitter-utpEFr_u.png",
+    "/build/assets/linkedin-mKZIAaDv.png",
+    "/build/assets/instagram-7-6aoY1V.png",
+    "/build/assets/github-amIXt1jg.png"
+  ],
+  "vendor/tightenco/ziggy/dist/index.js": [
+    "/build/assets/prev-qt-vb8-U.png",
     "/build/assets/Julian-ecfpeahs.jpg",
     "/build/assets/pixelate_julian-HK5kF2OM.png",
     "/build/assets/twitter-utpEFr_u.png",

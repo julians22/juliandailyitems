@@ -1,46 +1,56 @@
 <script setup>
 import TogglerTheme from '@/Components/TogglerTheme.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, router, usePage } from '@inertiajs/vue3';
 
-import { router } from '@inertiajs/vue3'
-import { vIntersectionObserver } from '@vueuse/components'
+import axios from "axios";
 
-import { ref, onMounted } from "vue";
+import { route } from 'ziggy-js';
+
+import { ref, onMounted, defineAsyncComponent } from "vue";
+import { pageview } from 'vue-gtag';
 
 const props = defineProps(['dailyItems']);
 
 const dailyItemsData = ref([]);
 
 const root = ref(null)
-const isVisible = ref(false)
+const apiurl = ref(`${import.meta.env.VITE_API_URL}/public/daily-items`);
+const nextUrl = ref(apiurl.value);
 
-const initialUrl = ref(router.page.url);
-
-function onIntersectionObserver([{ isIntersecting }]) {
-  isVisible.value = isIntersecting;
-  loadMorePosts();
-}
+const DailyItemCard = defineAsyncComponent(() => import('@/Components/DailyItemCard.vue'));
 
 onMounted(() => {
-    dailyItemsData.value = props.dailyItems.data;
+    pageview({
+        page_title: 'Collection - Deanabnerjul',
+        page_location: window.location,
+        page_path: '/collections',
+    });
+    
+    loadMorePosts();
+});
+
+const goback = () => router.visit(route('frontend.home'), {
+    method: 'get',
+    preserveScroll: true
 });
 
 function loadMorePosts() {
-    if (props.dailyItems.next_page_url === null) {
+    if (nextUrl.value === null) {
         console.log('no more fetch');
         return
     }
+    const url = nextUrl.value;
 
-    router.get(props.dailyItems.next_page_url, {}, {
-        preserveState: true,
-        preserveScroll: true,
-        only: ['dailyItems'],
-        onSuccess: () => {
-            dailyItemsData.value = [...dailyItemsData.value, ...props.dailyItems.data]
-            window.history.replaceState({}, router.page.url, initialUrl.value)
-            // this.allPosts = [...this.allPosts, ...this.posts.data]
-        }
-    })
+    nextUrl.value = null;
+    
+    axios.get(url)
+        .catch(function () {
+            nextUrl.value = null;
+        })
+        .then(function (response) {
+            dailyItemsData.value = [...dailyItemsData.value, ...response.data.data];
+            nextUrl.value = response.data.links.next || null;
+        });
 }
 
 
@@ -50,24 +60,27 @@ function loadMorePosts() {
 
     <Head>
         <title>Collection</title>
-        <meta name="description"
-            content="Dean Abner Julian personal collection/daily items website's. May you want it too">
+        <meta name="description" content="Dean Abner Julian personal collection/daily items website's. May you want it too">
     </Head>
-    <main class="mt-10" ref="root">
-        <TogglerTheme/>
-        <div class="mx-auto container">
-            <div class="gap-4 lg:gap-6 xl:gap-8 grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-5 pb-4">
-                <div class="flex flex-col justify-center items-center items-wrapper border-[2px] border-dajgreen-light shadow-dayitem dark:shadow-dayitem-green w-full overflow-hidden" v-for="collection in dailyItemsData" :key="collection.id">
-                    <div class="flex flex-col items-center mx-auto py-2 overflow-hidden group">
-                        <img class="group-hover:scale-105 rounded-md w-11/12 transform transition-all duration-300 aspect-square object-center object-contain" :alt="`Dean Abner Julian daily items ${collection.title}`" width="300" height="300" :src="`storage/${collection.image}`" alt="">
-                        <p class="my-2 font-medium text-black text-center text-sm dark:text-white tracking-tight" :title="collection.title">{{ collection.title }}</p>
-                        <a title="Beli Human Greatness Midweight T-shirt Maroon" target="_blank" :href="collection.url" class="group-hover:scale-105 bg-black mt-auto px-2 py-1 border rounded-full font-semibold text-base text-white transform transition-all group-hover:-translate-y-2 duration-300 group/button"><span class="group-hover/button:animate-blink duration-75">Gasken!</span><span class="transform transition-all group-hover/button:animate-blink duration-75 delay-1000">🔥</span></a>
-                    </div>
+    <main class="flex flex-col">
+        <div class="flex-shrink mt-10">
+            <span class="float-left dark:border-white dark:bg-dajgreen-light hover:shadow p-2 border border-black rounded-full hover:scale-105" title="Kembali" @click="goback()">
+                <img width="20" height="20" src="/public/icons/prev.png" alt="" class="dark:invert">
+            </span>
+            <TogglerTheme/>
+        </div>
 
+        <div class="flex-grow">
+            <div class="mx-auto container">
+                <div class="gap-4 lg:gap-6 xl:gap-8 grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-5 pb-4" ref="root">
+                    <DailyItemCard v-for="collection in dailyItemsData" :key="collection.id" :title="collection.title" :image="collection.image" :link="collection.url"/>
                 </div>
+            </div>
+
+            <div v-if="nextUrl !== null" class="flex justify-center">
+                <button class="bg-dajgreen dark:bg-dajgreen-light mx-auto px-4 py-2 border rounded-full text-white" @click="loadMorePosts()">Selanjutnya</button>
             </div>
         </div>
 
-        <span aria-hidden="true" v-intersection-observer="[onIntersectionObserver, { root, rootMargin: '-150px 0px 0px 0px' }]"></span>
     </main>
 </template>

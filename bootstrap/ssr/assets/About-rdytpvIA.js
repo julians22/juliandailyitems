@@ -2,9 +2,11 @@ import { ref, onMounted, unref, withCtx, createVNode, createTextVNode, toDisplay
 import { ssrRenderSlot, ssrRenderComponent, ssrInterpolate } from "vue/server-renderer";
 import { VueWinBox } from "vue-winbox";
 import { P as PixelateImage } from "../ssr.js";
+import { event } from "vue-gtag";
 import "@vueuse/core";
 import "@vueuse/components";
 import "@inertiajs/vue3";
+import "axios";
 import "@inertiajs/vue3/server";
 import "@vue/server-renderer";
 const _sfc_main = {
@@ -44,6 +46,10 @@ const _sfc_main = {
       };
     };
     const blur = (name) => {
+      event("view_item", {
+        "event_label": name,
+        "event_category": "engagement"
+      });
     };
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[--><span>`);
@@ -56,7 +62,7 @@ const _sfc_main = {
           ref: winboxref,
           options: OPTIONS,
           onClose: ($event) => isOpen.value = false,
-          onFocus: ($event) => blur()
+          onFocus: ($event) => blur("about")
         }, {
           default: withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {

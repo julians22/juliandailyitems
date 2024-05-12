@@ -18,9 +18,11 @@ use TCG\Voyager\Facades\Voyager;
 
 Route::group(['as' => 'frontend.'], function() {
     Route::get('/', function () {
-        return Inertia::render('Welcome', [
-            'collection_url' => route('frontend.collections.index')
-        ]);
+        return Inertia::render('Welcome')
+            ->withViewData([
+                'title' => 'Home - ' . config('app.name'),
+                'description' => "Dean Abner Julian personal information website's"
+            ]);
     })->name('home');
 
     Route::resource('collections', CollectionController::class)->only('index', 'show');

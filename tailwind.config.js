@@ -27,7 +27,7 @@ export default {
                 blink: 'blink 1s ease-in-out infinite'
             },
             fontFamily: {
-                'console': ['FiraCode Nerd Font', ...defaultTheme.fontFamily.sans]
+                'console': ['FiraCode Nerd Font Second', ...defaultTheme.fontFamily.sans]
             },
             boxShadow: {
                 'dayitem-green': '5px 5px 0px -2px #0b1008, 5px 5px #25361b',

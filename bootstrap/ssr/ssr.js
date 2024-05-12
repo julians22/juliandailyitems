@@ -1,10 +1,13 @@
-import { unref, withCtx, createVNode, useSSRContext, ref, onMounted, mergeProps, defineAsyncComponent, createTextVNode, createSSRApp, h } from "vue";
-import { ssrRenderComponent, ssrRenderClass, ssrRenderList, ssrRenderAttr, ssrInterpolate, ssrRenderAttrs, ssrGetDirectiveProps } from "vue/server-renderer";
+import { unref, withCtx, createVNode, useSSRContext, ref, defineAsyncComponent, onMounted, createTextVNode, createSSRApp, h } from "vue";
+import { ssrRenderComponent, ssrRenderClass, ssrRenderAttr, ssrRenderList, ssrRenderAttrs } from "vue/server-renderer";
 import { useDark, useToggle } from "@vueuse/core";
-import { UseDark, vIntersectionObserver } from "@vueuse/components";
-import { router, Head, Link, createInertiaApp } from "@inertiajs/vue3";
+import { UseDark } from "@vueuse/components";
+import { Head, Link, createInertiaApp } from "@inertiajs/vue3";
+import axios from "axios";
+import VueGtag, { pageview } from "vue-gtag";
 import createServer from "@inertiajs/vue3/server";
 import { renderToString } from "@vue/server-renderer";
+const _imports_0$1 = "/build/assets/prev-qt-vb8-U.png";
 const _sfc_main$4 = {
   __name: "TogglerTheme",
   __ssrInlineRender: true,
@@ -43,36 +46,41 @@ _sfc_main$4.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/TogglerTheme.vue");
   return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
 };
+(function() {
+  for (var t = [], e = 0; e < 256; ++e)
+    t.push("%" + ((e < 16 ? "0" : "") + e.toString(16)).toUpperCase());
+  return t;
+})();
 const _sfc_main$3 = {
   __name: "Collection",
   __ssrInlineRender: true,
   props: ["dailyItems"],
   setup(__props) {
-    const props = __props;
     const dailyItemsData = ref([]);
-    const root = ref(null);
-    const isVisible = ref(false);
-    const initialUrl = ref(router.page.url);
-    function onIntersectionObserver([{ isIntersecting }]) {
-      isVisible.value = isIntersecting;
-      loadMorePosts();
-    }
+    ref(null);
+    const apiurl = ref(`${"https://deanabnerjul.com/api/v1"}/public/daily-items`);
+    const nextUrl = ref(apiurl.value);
+    const DailyItemCard = defineAsyncComponent(() => import("./assets/DailyItemCard-T7mOmoXf.js"));
     onMounted(() => {
-      dailyItemsData.value = props.dailyItems.data;
+      pageview({
+        page_title: "Collection - Deanabnerjul",
+        page_location: window.location,
+        page_path: "/collections"
+      });
+      loadMorePosts();
     });
     function loadMorePosts() {
-      if (props.dailyItems.next_page_url === null) {
+      if (nextUrl.value === null) {
         console.log("no more fetch");
         return;
       }
-      router.get(props.dailyItems.next_page_url, {}, {
-        preserveState: true,
-        preserveScroll: true,
-        only: ["dailyItems"],
-        onSuccess: () => {
-          dailyItemsData.value = [...dailyItemsData.value, ...props.dailyItems.data];
-          window.history.replaceState({}, router.page.url, initialUrl.value);
-        }
+      const url = nextUrl.value;
+      nextUrl.value = null;
+      axios.get(url).catch(function() {
+        nextUrl.value = null;
+      }).then(function(response) {
+        dailyItemsData.value = [...dailyItemsData.value, ...response.data.data];
+        nextUrl.value = response.data.links.next || null;
       });
     }
     return (_ctx, _push, _parent, _attrs) => {
@@ -93,13 +101,24 @@ const _sfc_main$3 = {
         }),
         _: 1
       }, _parent));
-      _push(`<main class="mt-10">`);
+      _push(`<main class="flex flex-col"><div class="flex-shrink mt-10"><span class="float-left dark:border-white dark:bg-dajgreen-light hover:shadow p-2 border border-black rounded-full hover:scale-105" title="Kembali"><img width="20" height="20"${ssrRenderAttr("src", _imports_0$1)} alt="" class="dark:invert"></span>`);
       _push(ssrRenderComponent(_sfc_main$4, null, null, _parent));
-      _push(`<div class="mx-auto container"><div class="gap-4 lg:gap-6 xl:gap-8 grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-5 pb-4"><!--[-->`);
+      _push(`</div><div class="flex-grow"><div class="mx-auto container"><div class="gap-4 lg:gap-6 xl:gap-8 grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-5 pb-4"><!--[-->`);
       ssrRenderList(dailyItemsData.value, (collection) => {
-        _push(`<div class="flex flex-col justify-center items-center items-wrapper border-[2px] border-dajgreen-light shadow-dayitem dark:shadow-dayitem-green w-full overflow-hidden"><div class="flex flex-col items-center mx-auto py-2 overflow-hidden group"><img class="group-hover:scale-105 rounded-md w-11/12 transform transition-all duration-300 aspect-square object-center object-contain"${ssrRenderAttr("alt", `Dean Abner Julian daily items ${collection.title}`)} width="300" height="300"${ssrRenderAttr("src", `storage/${collection.image}`)} alt=""><p class="my-2 font-medium text-black text-center text-sm dark:text-white tracking-tight"${ssrRenderAttr("title", collection.title)}>${ssrInterpolate(collection.title)}</p><a title="Beli Human Greatness Midweight T-shirt Maroon" target="_blank"${ssrRenderAttr("href", collection.url)} class="group-hover:scale-105 bg-black mt-auto px-2 py-1 border rounded-full font-semibold text-base text-white transform transition-all group-hover:-translate-y-2 duration-300 group/button"><span class="group-hover/button:animate-blink duration-75">Gasken!</span><span class="transform transition-all group-hover/button:animate-blink duration-75 delay-1000">🔥</span></a></div></div>`);
+        _push(ssrRenderComponent(unref(DailyItemCard), {
+          key: collection.id,
+          title: collection.title,
+          image: collection.image,
+          link: collection.url
+        }, null, _parent));
       });
-      _push(`<!--]--></div></div><span${ssrRenderAttrs(mergeProps({ "aria-hidden": "true" }, ssrGetDirectiveProps(_ctx, unref(vIntersectionObserver), [onIntersectionObserver, { root: root.value, rootMargin: "-150px 0px 0px 0px" }])))}></span></main><!--]-->`);
+      _push(`<!--]--></div></div>`);
+      if (nextUrl.value !== null) {
+        _push(`<div class="flex justify-center"><button class="bg-dajgreen dark:bg-dajgreen-light mx-auto px-4 py-2 border rounded-full text-white">Selanjutnya</button></div>`);
+      } else {
+        _push(`<!---->`);
+      }
+      _push(`</div></main><!--]-->`);
     };
   }
 };
@@ -151,12 +170,10 @@ const ErrorComponent = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["ssrRender", _
 const _sfc_main = {
   __name: "Welcome",
   __ssrInlineRender: true,
-  props: ["collection_url"],
   setup(__props) {
-    const props = __props;
     const isBrowser = typeof window !== "undefined";
     const WinBoxContact = defineAsyncComponent({
-      loader: () => import("./assets/Contact--P9OboJx.js"),
+      loader: () => import("./assets/Contact-kdTGGYKZ.js"),
       // A component to use while the async component is loading
       loadingComponent: LoadingComponent,
       // Delay before showing the loading component. Default: 200ms.
@@ -168,7 +185,7 @@ const _sfc_main = {
       timeout: 3e3
     });
     const WinBoxAbout = defineAsyncComponent({
-      loader: () => import("./assets/About-RiBXRhk5.js"),
+      loader: () => import("./assets/About-rdytpvIA.js"),
       // A component to use while the async component is loading
       loadingComponent: LoadingComponent,
       // Delay before showing the loading component. Default: 200ms.
@@ -178,6 +195,13 @@ const _sfc_main = {
       // The error component will be displayed if a timeout is
       // provided and exceeded. Default: Infinity.
       timeout: 3e3
+    });
+    onMounted(() => {
+      pageview({
+        page_title: "Home - Deanabnerjul",
+        page_location: window.location,
+        page_path: "/"
+      });
     });
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
@@ -197,7 +221,7 @@ const _sfc_main = {
         }),
         _: 1
       }, _parent));
-      _push(`<div class="flex flex-col justify-between"><header class="font-console"><div class="mx-auto">`);
+      _push(`<div class="flex flex-col justify-center min-h-screen"><header class="font-console"><div class="mx-auto">`);
       _push(ssrRenderComponent(_sfc_main$4, null, null, _parent));
       _push(`</div><div class="flex justify-center items-center mb-6"><div class="border-8 border-green-900 rounded-full w-52 h-52 overflow-hidden"><img${ssrRenderAttr("src", _imports_0)} alt="" width="200" height="200" class="object-left w-full scale-100 hover:scale-125 transition-all duration-500 aspect-square ease-in-out object-cover"></div></div><nav class="mb-2"><ul class="flex flex-wrap justify-center items-center space-x-6 lg:space-x-4 space-y-2 lg:space-y-0 font-semibold"><li class="tracking-normal cursor-pointer">`);
       if (isBrowser) {
@@ -235,7 +259,7 @@ const _sfc_main = {
       }
       _push(`</li><li class="tracking-normal cursor-pointer">`);
       _push(ssrRenderComponent(unref(Link), {
-        href: props.collection_url
+        href: _ctx.route("frontend.collections.index")
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
@@ -288,7 +312,9 @@ createServer(
     setup({ App, props, plugin }) {
       return createSSRApp({
         render: () => h(App, props)
-      }).use(plugin).use(yearCalculate);
+      }).use(plugin).use(VueGtag, {
+        config: { id: "G-1CP2N0THM6" }
+      }).use(yearCalculate);
     }
   })
 );

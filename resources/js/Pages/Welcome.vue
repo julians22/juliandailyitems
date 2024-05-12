@@ -1,28 +1,21 @@
 <script setup>
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, onMounted } from 'vue'
 import TogglerTheme from '@/Components/TogglerTheme.vue'
 import { Head, Link } from '@inertiajs/vue3';
 
-const props = defineProps(['collection_url']);
-
 const isBrowser = typeof window !== 'undefined';
-
 // LoadingComponent
 import LoadingComponent from "@/Components/utils/Loading.vue";
-
 // ErrorComponent
 import ErrorComponent from "@/Components/utils/Error.vue";
-
-// import WinBoxContact from "@/Components/Winbox/Contact.vue";
+import { pageview } from 'vue-gtag';
 
 const WinBoxContact = defineAsyncComponent({
     loader: () => import('@/Components/Winbox/Contact.vue'),
-
     // A component to use while the async component is loading
     loadingComponent: LoadingComponent,
     // Delay before showing the loading component. Default: 200ms.
     delay: 200,
-
     // A component to use if the load fails
     errorComponent: ErrorComponent,
     // The error component will be displayed if a timeout is
@@ -32,17 +25,23 @@ const WinBoxContact = defineAsyncComponent({
 
 const WinBoxAbout = defineAsyncComponent({
     loader: () => import('@/Components/Winbox/About.vue'),
-
     // A component to use while the async component is loading
     loadingComponent: LoadingComponent,
     // Delay before showing the loading component. Default: 200ms.
     delay: 200,
-
     // A component to use if the load fails
     errorComponent: ErrorComponent,
     // The error component will be displayed if a timeout is
     // provided and exceeded. Default: Infinity.
     timeout: 3000    
+});
+
+onMounted(() => {
+    pageview({
+        page_title: 'Home - Deanabnerjul',
+        page_location: window.location,
+        page_path: '/',
+    });
 });
 
 </script>
@@ -52,7 +51,7 @@ const WinBoxAbout = defineAsyncComponent({
         <title>Home</title>
         <meta name="description" content="Dean Abner Julian personal information website's">
     </Head>
-    <div class="flex flex-col justify-between">
+    <div class="flex flex-col justify-center min-h-screen">
         <header class="font-console">
             <div class="mx-auto">
                 <TogglerTheme/>
@@ -74,7 +73,7 @@ const WinBoxAbout = defineAsyncComponent({
                             /about-me
                         </WinBoxAbout>
                     </li>
-                    <li class="tracking-normal cursor-pointer"><Link :href="props.collection_url">/my-collection</Link></li>
+                    <li class="tracking-normal cursor-pointer"><Link :href="route('frontend.collections.index')">/my-collection</Link></li>
                 </ul>
             </nav>
             <h1 class="font-bold text-2xl text-green-900 tracking-wide"><img src="/public/pixelate_julian.png" alt="Dean Abner Julian Pixelate" width="30" height="30" class="float-left mr-2">deanabnerjul:$<span class="animate-blink duration-75 ease-in-out">|</span></h1>

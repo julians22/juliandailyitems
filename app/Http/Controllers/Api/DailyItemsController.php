@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class DailyItemsController extends Controller
 {
     public function index() {
-        $items = DailyItemResources::collection(DailyItem::orderBy('sort', 'asc')->paginate(6));
+        $items = DailyItemResources::collection(DailyItem::orderBy('sort', 'asc')->paginate(10));
 
         return $items;
     }

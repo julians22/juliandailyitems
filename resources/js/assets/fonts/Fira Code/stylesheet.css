@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'FiraCode Nerd Font Second';
+    src: local('Fira Code Medium Nerd Font Complete'), local('FiraCodeNerdFontComplete-Medium'),
+        url('@/assets/fonts/Fira Code/FiraCodeNerdFontComplete-Medium.woff2') format('woff2'),
+        url('@/assets/fonts/Fira Code/FiraCodeNerdFontComplete-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FiraCode Nerd Font Second';
+    src: local('Fira Code Bold Nerd Font Complete'), local('FiraCodeNerdFontComplete-Bold'),
+        url('@/assets/fonts/Fira Code/FiraCodeNerdFontComplete-Bold.woff2') format('woff2'),
+        url('@/assets/fonts/Fira Code/FiraCodeNerdFontComplete-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FiraCode Nerd Font Second';
+    src: local('Fira Code Light Nerd Font Complete'), local('FiraCodeNerdFontComplete-Light'),
+        url('@/assets/fonts/Fira Code/FiraCodeNerdFontComplete-Light.woff2') format('woff2'),
+        url('@/assets/fonts/Fira Code/FiraCodeNerdFontComplete-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FiraCode Nerd Font Second';
+    src: local('Fira Code Regular Nerd Font Complete'), local('FiraCodeNerdFontComplete-Regular'),
+        url('@/assets/fonts/Fira Code/FiraCodeNerdFontComplete-Regular.woff2') format('woff2'),
+        url('@/assets/fonts/Fira Code/FiraCodeNerdFontComplete-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FiraCode Nerd Font Second';
+    src: local('Fira Code Retina Nerd Font Complete'), local('FiraCodeNerdFontComplete-Retina'),
+        url('@/assets/fonts/Fira Code/FiraCodeNerdFontComplete-Retina.woff2') format('woff2'),
+        url('@/assets/fonts/Fira Code/FiraCodeNerdFontComplete-Retina.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FiraCode Nerd Font Second';
+    src: local('Fira Code SemiBold Nerd Font Complete'), local('FiraCodeNerdFontComplete-SemiBold'),
+        url('@/assets/fonts/Fira Code/FiraCodeNerdFontComplete-SemiBold.woff2') format('woff2'),
+        url('@/assets/fonts/Fira Code/FiraCodeNerdFontComplete-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+

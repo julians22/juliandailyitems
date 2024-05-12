@@ -1,10 +1,10 @@
-import { createInertiaApp } from '@inertiajs/vue3'
+import { createInertiaApp, router } from '@inertiajs/vue3'
 import createServer from '@inertiajs/vue3/server'
 import { renderToString } from '@vue/server-renderer'
 import { createSSRApp, h } from 'vue'
 
-import { VueWinBox } from "vue-winbox";
 import yearCalculate from './plugins/yearCalculate';
+import VueGtag from 'vue-gtag';
 
 createServer(page =>
   createInertiaApp({
@@ -18,6 +18,9 @@ createServer(page =>
       return createSSRApp({
         render: () => h(App, props),
       }).use(plugin)
+      .use(VueGtag, {
+        config: { id: "G-1CP2N0THM6" }
+      })
       .use(yearCalculate)
     },
   }),

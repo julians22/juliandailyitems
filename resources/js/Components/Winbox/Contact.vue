@@ -2,6 +2,7 @@
 import VueWinBox from 'vue-winbox';
 import PixelateImage from '/public/pixelate_julian.png';
 import { ref, onMounted } from "vue";
+import { event } from 'vue-gtag';
 
 const winboxref = ref(null)
 
@@ -50,10 +51,10 @@ const initTerminalWidth = () => {
 }
 
 const blur = (name) => {
-//   event('view_item', {
-//     'event_label': name,
-//     'event_category': 'engagement',
-//   })
+  event('view_item', {
+    'event_label': name,
+    'event_category': 'engagement',
+  })
 }
 
 </script>

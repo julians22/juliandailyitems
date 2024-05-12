@@ -18,6 +18,9 @@ class CollectionController extends Controller
 
         return Inertia::render('Collection', [
             'dailyItems' => $collection
+        ])->withViewData([
+            'title' => 'Collection - ' . config('app.name'),
+            'description' => "Dean Abner Julian personal collection/daily items website's. May you want it too"
         ]);
     }
 
